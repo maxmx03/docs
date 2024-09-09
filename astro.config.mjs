@@ -45,9 +45,16 @@ export default defineConfig({
             {
               label: 'First Steps',
               translations: {
-                'pt-BR': 'Preparando o ambiente',
+                'pt-BR': 'Primeiros Passos',
               },
               autogenerate: { directory: 'lua/preparando-ambiente' },
+            },
+            {
+              label: 'Basics',
+              translations: {
+                'pt-BR': 'Conceitos Básicos'
+              },
+              autogenerate: { directory: 'lua/conceitos-basicos' }
             },
           ],
         },

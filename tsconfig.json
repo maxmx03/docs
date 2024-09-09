@@ -1,7 +1,13 @@
 {
-  "extends": "astro/tsconfigs/strict",
+   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"]
+    }
+  },
+  "extends": "astro/tsconfigs/strict", 
   "mdx": {
-    // Enable strict type checking in MDX files.
     "checkMdx": true
   }
 }
