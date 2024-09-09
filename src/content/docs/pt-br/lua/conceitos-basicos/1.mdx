@@ -1,13 +1,14 @@
 ---
-title: Criando Variáveis
+title: Declarando Variáveis
 ---
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components'
+import CodeLua from '@components/CodeLua.astro'
+import CodeBash from '@components/CodeBash.astro'
 
 Em Lua, você pode criar variáveis para armazenar e manipular dados.
 Declarar uma variável é simples. Vamos ver um exemplo:
 
-```lua
-local mensagem = "Olá, mundo"
-```
+<CodeLua code={`local mensagem = "Olá, mundo"`} />
 
 No trecho de código acima, declaramos uma variável chamada `mensagem` usando a
 palavra-chave local. A palavra-chave local indica que a variável possui
@@ -22,25 +23,24 @@ Uma vez que a variável é declarada, você pode usá-la em seu código.
 Por exemplo, você pode imprimir o valor da variável `mensagem` usando a função
 print:
 
-=== "Lua"
 
-    ```lua
-    print(mensagem)
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code="print(mensagem)" />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code="Olá, mundo!" />
+  </TabItem>
+</Tabs>
 
-=== "Console"
-
-    ```bash
-    Olá mundo
-    ```
 
 Em Lua, as variáveis podem armazenar diferentes tipos de valores, como
 números, strings, booleanos, tabelas e outros.
 
-!!! tip
-
-    Lembre-se de escolher nomes significativos e descritivos para suas
-    variáveis, a fim de melhorar a legibilidade e a manutenção do código.
+<Aside type="tip">
+  Lembre-se de escolher nomes significativos e descritivos para suas
+  variáveis, a fim de melhorar a legibilidade e a manutenção do código.
+</Aside>
 
 ## Variáveis Globais
 
@@ -51,42 +51,42 @@ ou função onde foi originalmente declarada.
 
 Aqui está um exemplo de declaração de uma variável global:
 
-```lua
-mensagem = "Olá, mundo!"
-```
+<CodeLua code={`mensagem = "Olá, mundo!"`} />
 
-!!! tip
-
+<Aside type="tip">
     Quando uma variável global é atribuída, ela mantém seu valor até que seja
     alterada ou o programa termine sua execução.
+</Aside>
 
 ## Escopo
 
 Em Lua, o escopo define a visibilidade e a acessibilidade de uma variável.
 O escopo pode ser local ou global.
 
-**Variáveis Locais**: Essas variáveis estão visíveis e acessíveis apenas dentro
+### Local
+
+Essas variáveis estão visíveis e acessíveis apenas dentro
 do bloco ou função em que foram declaradas.
 
-=== "Lua"
+export const scopeLocalExample = `
+do
+  local mensagem = "Olá, mundo!"
+  print(mensagem)
+end
 
-    ```lua
-    do
-        local mensagem = "Olá, mundo!"
-        print(mensagem)
-    end
+do
+  print(mensagem) -- nil
+end
+`
 
-    do
-        print(mensagem)
-    end
-    ```
-
-=== "Console"
-
-    ```bash
-    Olá, mundo!
-    nil
-    ```
+<Tabs>
+  <TabItem label="neovim">
+    <CodeLua code={scopeLocalExample} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`Olá, mundo!\nnil`} />
+  </TabItem>
+</Tabs>
 
 No primeiro bloco, a variável `mensagem` é declarada como uma variável local
 dentro do bloco `do`. Ela pode ser usada dentro desse bloco e é impressa
@@ -95,35 +95,38 @@ corretamente.
 No segundo bloco, ao tentar acessar a variável mensagem,
 o print mostra `nil` porque ela não está definida nesse escopo.
 
-**Variáveis Globais**: Variáveis globais são declaradas sem o uso da
-palavra-chave local. Elas podem ser acessadas e modificadas em qualquer
+### Global
+
+Variáveis globais são declaradas sem o uso da palavra-chave local. Elas podem ser acessadas e modificadas em qualquer
 parte do programa.
 
-=== "Lua"
+export const scopeGlobalExample = `
+do
+  mensagem = "Olá, mundo"
+end
 
-    ```lua
-    do
-        mensagem = "Olá, mundo"
-    end
+do
+  print(mensagem)
+end
+`
 
-    do
-        print(mensagem)
-    end
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={scopeGlobalExample} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code="Olá, mundo" />
+  </TabItem>
+</Tabs>
 
-=== "Console"
-
-    ```bash
-    Olá, mundo
-    ```
 
 No exemplo acima, a variável mensagem é declarada sem a palavra-chave `local`.
 Portanto, ela se torna uma variável global. Ela pode ser acessada e impressa
 em qualquer parte do programa, incluindo fora do bloco onde foi declarada.
 
-!!! warning
-
+<Aside type="caution">
     O uso excessivo de variáveis globais pode poluir o espaço global do
     programa, tornando-o confuso e difícil de gerenciar. Isso pode dificultar a
     manutenção e a compreensão do código, até dificultando o rastreamento
     de bugs.
+</Aside>
