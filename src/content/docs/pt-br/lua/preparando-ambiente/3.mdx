@@ -1,41 +1,23 @@
 ---
 title: Instalando Lua
 ---
-
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Code } from '@astrojs/starlight/components';
+import CodeBash from '@components/CodeBash.astro'
 
 Para fazer a instalação, uma opção é usar um gerenciador de pacotes de seu Sistema Operacional
 
 <Tabs>
   <TabItem label="ArchLinux">
-
-```bash
-pacman -S lua
-```
-
+   <CodeBash code="pacman -S lua" />
   </TabItem>
   <TabItem label="Ubuntu">
-
-```bash 
-sudo apt install lua5.4 
-```
-
+   <CodeBash code="apt install lua5.4" />
   </TabItem>
   <TabItem label="MacOS">
-
-```bash
-  brew install lua
-```
-
+    <CodeBash code="brew install lua" />
   </TabItem>
   <TabItem label="Windows 11">
-
-```bash
-scoop bucket add main 
-scoop install main/lua 
-```
-
-
+    <CodeBash code={`scoop bucket add main\nscoop install main\\lua`} />
   </TabItem>
 </Tabs>
 

@@ -1,62 +1,39 @@
 ---
 title: Olá, mundo!
 ---
+import { Tabs, TabItem, Steps, Code } from '@astrojs/starlight/components';
+import CodeLua from '@components/CodeLua.astro'
+import CodeBash from '@components/CodeBash.astro'
 
 É uma prática comum iniciar o aprendizado de uma nova linguagem de programação
 com o famoso `"Hello World"`. No Lua, isso é bastante simples. Basta chamar a
 função print e passar como parâmetro o que você deseja exibir na tela.
 
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
-
-<Tabs>
-  <TabItem label="Lua">
-
-```lua
-print("Olá, mundo!")
-```
-
-  </TabItem>
-  <TabItem label="C">
-
-```c
+export const example2 = `
 #include <stdio.h>
 
 int main()
 {
-  puts("Hello World");
+  puts("Olá, mundo!");
 
   return 0;
 }
-```
-
-  </TabItem>
-</Tabs>
-
-
-## Rodando o primeiro programa
-
+`
 
 <Tabs>
-  <TabItem label="Lua">
-
-```bash
-lua init.lua
-```
-
-
+  <TabItem label="editor">
+    <CodeLua code="print('Olá, mundo!')" />
   </TabItem>
-  <TabItem label="C">
-
-```c
-gcc main.c -o main
-./main
-```
-
+  <TabItem label="terminal">
+    <CodeBash code="lua init.lua # Olá, mundo!" />
+  </TabItem>
+  <TabItem label="editor">
+    <Code code={example2} lang="c" title="main.c" showLineNumbers />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`gcc main.c -o hello\n./hello # Olá, mundo!`} />
   </TabItem>
 </Tabs>
-
-
-
 
 
 Em contraste, ao programar em C, o código do programa "Hello World" é
