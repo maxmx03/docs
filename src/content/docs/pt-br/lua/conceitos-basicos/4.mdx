@@ -1,6 +1,10 @@
 ---
 title: String
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+import CodeLua from '@components/CodeLua.astro'
+import CodeBash from '@components/CodeBash.astro'
+
 
 Uma string em Lua é uma sequência de caracteres. Ela é frequentemente usada
 para representar palavras, frases e textos em geral.
@@ -16,23 +20,29 @@ variável length. Da mesma forma, a função `string.len()` também retorna o
 tamanho da string. Ambos os valores são impressos no console usando a função
 `print()`.
 
-=== "Lua"
+export const example1 = `
+local hello = "Olá, mundo"
+local length = #hello
+local length2 = string.len(hello)
 
-    ```lua
-    local hello = "Olá, mundo"
-    local length = #hello
-    local length2 = string.len(hello)
+print(string.format("Tamanho da string: %s", length))
+print(string.format("Tamanho da string: %s", length2))
+`
 
-    print(string.format("Tamanho da string: %s", length))
-    print(string.format("Tamanho da string: %s", length2))
-    ```
+export const exampleOutput1 = `
+Tamanho da string: 11
+Tamanho da string: 11
+`
 
-=== "Console"
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example1} mark={["#hello", "string.len(hello)"]} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={exampleOutput1 } />
+  </TabItem>
+</Tabs>
 
-    ```bash
-    Tamanho da string: 11
-    Tamanho da string: 11
-    ```
 
 ## Concatenação de strings e string.format()
 
@@ -40,19 +50,20 @@ Em Lua, a concatenação de strings é realizada utilizando o operador de
 concatenação (`..`). Esse operador permite combinar duas ou mais strings
 em uma única string.
 
-=== "Lua"
+export const example2 = `
+local str = "Lua"
+str = str .. " programming"
+print(str)
+`
 
-    ```lua
-    local str = "Lua"
-    str = str .. " programming"
-    print(str)
-    ```
-
-=== "Console"
-
-    ```bash
-    Lua programming
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example2} mark={`str .. " programming"`} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code="Lua programming" />
+  </TabItem>
+</Tabs>
 
 Além da concatenação, você também pode usar a função `string.format` para
 formatar strings em Lua. Essa função permite combinar valores e strings
@@ -68,22 +79,21 @@ formatadas em uma única string, seguindo um padrão definido.
 | `%x` ou `%X`  | Formata o argumento como um número hexadecimal             |
 | `%%`          | Insere um caractere de porcentagem literal (`%`) na string |
 
-Exemplo:
+export const example3 = `
+local name = "Alice"
+local age = 25
+local message = string.format("Olá, meu nome é %s e eu tenho %d anos.", name, age)
+print(message)
+`
 
-=== "Lua"
-
-    ```lua
-    local name = "Alice"
-    local age = 25
-    local message = string.format("Olá, meu nome é %s e eu tenho %d anos.", name, age)
-    print(message)
-    ```
-
-=== "Console"
-
-    ```bash
-    Olá, meu nome é Alice e eu tenho 25 anos.
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example3} mark={["%s", "%d"]} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code="Olá, meu nome é Alice e eu tenho 25 anos." />
+  </TabItem>
+</Tabs>
 
 ## Coerção de Strings
 
@@ -93,46 +103,53 @@ valor não string como uma string.
 
 Existem várias maneiras de realizar a coerção de strings em Lua:
 
-**Concatenação Implícita**: Uma forma comum de coerção de strings é através
+### Concatenação Implícita
+
+Uma forma comum de coerção de strings é através
 da concatenação implícita.
 Quando você usa o operador de concatenação (`..`) para combinar uma string com
 outro tipo de dado, Lua automaticamente converte o valor para uma string.
 
-=== "Lua"
-
-    ```lua
+export const example4 = `
     local number = 42
     local str = "O número é: " .. number
     print(str)
-    ```
+`
 
-=== "Console"
-
-    ```lua
-    O número é: 42
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example4} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code="O número é: 42" />
+  </TabItem>
+</Tabs>
 
 Nesse exemplo, o valor da variável number é implicitamente convertido para uma
 string durante a concatenação com a string `"O número é: "`. O resultado é a
 string final `"O número é: 42"`.
 
-**Função tostring**: Outra forma de realizar a coerção de strings é utilizando
+#### Função tostring
+
+Outra forma de realizar a coerção de strings é utilizando
 a função `tostring()`. Essa função converte explicitamente um valor para sua
 representação em string.
 
-=== "Lua"
+export const example5 = `
+local boolean = true
+local str = "O valor booleano é: " .. tostring(boolean)
+print(str)
+`
 
-    ```lua
-    local boolean = true
-    local str = "O valor booleano é: " .. tostring(boolean)
-    print(str)
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example5} mark="tostring(boolean)" />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code="O valor booleano é: true" />
+  </TabItem>
+</Tabs>
 
-=== "Console"
-
-    ```lua
-    O valor booleano é: true
-    ```
 
 ## Caracteres de Escape
 
@@ -148,20 +165,20 @@ Aqui estão alguns exemplos de caracteres de escape comumente usados em Lua:
 - \' - Aspas simples
 - \\ - Barra invertida
 
-Exemplo:
+export const example6 = `
+local message = 'Ele disse "tchau" e foi embora'
+print(message)
+`
 
-=== "Lua"
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example6} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`Ele disse "tchau" e foi embora`} />
+  </TabItem>
+</Tabs>
 
-    ```lua
-    local message = 'Ele disse "tchau" e foi embora'
-    print(message)
-    ```
-
-=== "Console"
-
-    ```bash
-    Ele disse "tchau" e foi embora
-    ```
 
 Nesse exemplo, as aspas duplas dentro da string são precedidas por uma barra
 invertida \ para que sejam tratadas como parte do texto, e não como o fim da
@@ -172,15 +189,16 @@ necessidade de escapar as aspas dentro da string
 
 A saída será a mesma:
 
-=== "Lua"
+export const example7 = `
+local message = "Ele disse \\"tchau\\" e foi embora"
+print(message)
+`
 
-    ```lua
-    local message = "Ele disse \"tchau\" e foi embora"
-    print(message)
-    ```
-
-=== "Console"
-
-    ```bash
-    Ele disse "tchau" e foi embora
-    ```
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example7} mark="\" />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`Ele disse "tchau" e foi embora`} />
+  </TabItem>
+</Tabs>
