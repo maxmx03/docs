@@ -20,7 +20,7 @@ export default defineConfig({
         },
       },
       social: {
-        github: 'https://github.com/maxmx03/milianor',
+        github: 'https://github.com/maxmx03',
       },
       sidebar: [
         {

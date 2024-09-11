@@ -1,11 +1,12 @@
 ---
-title: Console
+title: Entrada do Console
 ---
+import CodeLua from '@components/CodeLua.astro'
 
 Para obter entrada do usuário no console, você pode usar a função `io.read()`.
 Aqui está um exemplo de como obter a entrada do usuário e exibi-la no console:
 
-```lua
+export const example = `
 local nome, idade
 
 print("Por favor insira seu nome:")
@@ -15,4 +16,6 @@ print("Quantos anos você tem?")
 idade = io.read("n")
 
 print(string.format("Olá %s, você tem %d anos de idade", nome, idade))
-```
+`
+
+<CodeLua code={example} />
