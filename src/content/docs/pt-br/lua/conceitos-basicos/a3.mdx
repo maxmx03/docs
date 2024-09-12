@@ -1,0 +1,253 @@
+---
+title: Estrutura de Repetição
+---
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components'
+import CodeLua from '@components/CodeLua.astro'
+import CodeBash from '@components/CodeBash.astro'
+
+
+As estruturas de repetição permitem executar um bloco de código
+repetidamente com base em uma condição. Lua oferece três tipos
+principais de estruturas de repetição: `for` loop, `while` loop.
+Vamos explorar cada uma delas:
+
+## For númerico
+
+O loop for é utilizado quando se conhece previamente o número de iterações.
+Ele percorre uma sequência de valores e executa um bloco de código para
+cada valor da sequência.
+
+### Exemplo 1
+
+export const example1 = `
+for i = 1, 5, 1 do
+    print(i)
+end
+`
+
+export const example1Output = `
+1
+2
+3
+4
+5
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example1} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={example1Output} />
+  </TabItem>
+</Tabs>
+
+### Exemplo 2
+
+export const example2 = `
+for i = 5, 1, -1 do
+    print(i)
+end
+`
+
+export const example2Output = `
+5
+4
+3
+2
+1
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example2} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={example2Output} />
+  </TabItem>
+</Tabs>
+
+O for loop possui três parâmetros: o primeiro é a variável de
+controle (no caso, `i`), o segundo é o limite (o loop será executado enquanto a
+variável de controle for menor ou igual ao limite), e o terceiro é o
+incremento da variável de controle a cada iteração.
+
+<Aside type="tip">
+    Se você omitir o terceiro parâmetro no for loop em Lua, ele assumirá um
+    valor padrão de 1. Isso significa que a variável de controle será
+    incrementada em 1 a cada iteração.
+</Aside>
+
+## While Loop
+
+O loop while é utilizado quando a condição de repetição não é conhecida
+antecipadamente. Ele executa um bloco de código repetidamente
+enquanto a condição especificada for verdadeira.
+
+export const example3 = `
+local i = 1
+
+while i <= 5 do
+  print(i)
+  i = i + 1
+end
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example3} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`1\n2\n3\n4\n5`} />
+  </TabItem>
+</Tabs>
+
+## repeat until
+
+A estrutura `repeat-until` é uma forma de loop em Lua que **executa um bloco de
+código repetidamente até que uma condição especificada seja verdadeira**.
+
+<Aside>
+A principal diferença em relação ao loop `while` é que a condição é verificada
+no final da iteração, ou seja, o bloco de código é executado pelo menos uma
+vez antes de verificar a condição.
+</Aside>
+
+export const example4 = `
+local i = 1
+
+repeat
+    print(i)
+    i = i + 1
+until i > 5
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example4} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`1\n2\n3\n4\n5`} />
+  </TabItem>
+</Tabs>
+
+Neste exemplo, o bloco de código será executado repetidamente enquanto a
+condição `i > 5` for falsa. A cada iteração, o valor de `i` é incrementado em 1.
+
+## For generico (ipars)
+
+O `for loop` genérico em Lua permite percorrer uma coleção de valores
+arbitrários, como uma tabela.
+Ele oferece uma maneira conveniente de iterar sobre os elementos de uma
+coleção sem precisar acompanhar manualmente o índice ou o estado de iteração.
+
+export const example5 = `
+local numeros = {10, 20, 30, 40, 50}
+
+for index, numero in ipairs(numeros) do
+    print(index, numero)
+end
+`
+
+export const example5Output = `
+1   10
+2   20
+3   30
+4   40
+5   50
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example5} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={example5} />
+  </TabItem>
+</Tabs>
+
+
+## For generico (pairs)
+
+O `pairs()` é uma função em Lua que retorna um iterador para percorrer
+todas as chaves e valores de uma tabela. Ao contrário do `ipairs()`, que
+itera apenas sobre as chaves numéricas da tabela em ordem crescente, o
+`pairs()` itera sobre todas as chaves da tabela, independentemente do tipo
+ou ordem.
+
+export const example6 = `
+local pessoa = {nome = "João", idade = 30, cidade = "São Paulo"}
+
+for chave, valor in pairs(pessoa) do
+    print(chave, valor)
+end
+`
+
+export const example6Output = `
+nome    João
+idade   30
+cidade  São Paulo
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example6} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={example6} />
+  </TabItem>
+</Tabs>
+
+## Como iterar strings
+
+Em Lua, é possível iterar uma string tratando-a como uma sequência de
+caracteres. Você pode usar o for loop genérico em conjunto com a função
+string.gmatch para percorrer cada caractere da string.
+
+<Aside>
+O ponto `"."` passado como argumento para gmatch representa um padrão que
+captura cada caractere individual da string. Dessa forma, o for
+loop itera por todos os caracteres da string.
+</Aside>
+
+export const example7 = `
+local texto = "Olá, Lua!"
+
+for caractere in texto:gmatch(".") do
+    print(caractere)
+end
+`
+
+export const example7Two = `
+local texto = "Olá, Lua!"
+local tamanho = #texto
+
+for i = 1, tamanho do
+    local caractere = texto:sub(i, i)
+    print(caractere)
+end
+`
+
+export const example7Output = `
+O
+l
+á
+,
+
+L
+u
+a
+!
+`
+
+<Tabs>
+  <TabItem label="editor - exemplo 1">
+    <CodeLua code={example7} />
+  </TabItem>
+  <TabItem label="editor - examplo 2">
+    <CodeLua code={example7Two} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={example7Output} />
+  </TabItem>
+</Tabs>

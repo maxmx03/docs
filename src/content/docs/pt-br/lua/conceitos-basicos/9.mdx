@@ -1,0 +1,105 @@
+---
+title: Operadores Lógicos
+---
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components'
+import CodeLua from '@components/CodeLua.astro'
+import CodeBash from '@components/CodeBash.astro'
+
+Os operadores lógicos testam e combinam condições lógicas. Eles permitem
+que você avalie a veracidade de expressões e tome decisões com base nesses
+resultados. Os operadores lógicos são comumente usados em estruturas de
+controle condicional, como condicionais if-else e loops, para determinar o
+fluxo de execução do programa.
+
+<Aside>
+Em Lua, qualquer valor que não seja `false` é considerado `true`.
+Apenas dois valores representam `false` para operadores lógicos, o valor
+constante de `false` e `nil`; todos os outros valores são considerados como
+verdadeiros.
+</Aside>
+
+## Operador lógico "and"
+
+O operador lógico `and` retorna o primeiro valor falso encontrado ou o último
+valor verdadeiro caso todos sejam verdadeiros.
+
+export const example1 = `
+local x = true and false
+local y = true and true
+local z = false and true
+local t = true and true and "" and 0 -- todos so valores são verdadeiros.
+
+print(x)
+print(y)
+print(z)
+print(t)
+`
+
+<Tabs>
+  <TabItem label="editor">
+    <CodeLua code={example1} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`false\ntrue\nfalse\n0`} />
+  </TabItem>
+</Tabs>
+
+## Tabela Verdade para Operadores Lógicos
+
+A tabela a seguir mostra todas as combinações possíveis dos operandos `A` e `B`
+nos operadores `and` e `or`, juntamente com seus respectivos resultados.
+
+| Operando A | Operando B | `A and B` | `A or B` |
+| ---------- | ---------- | --------- | -------- |
+| `true`     | `true`     | `true`    | `true`   |
+| `true`     | `false`    | `false`   | `true`   |
+| `false`    | `true`     | `false`   | `true`   |
+| `false`    | `false`    | `false`   | `false`  |
+
+## Operador lógico "or"
+
+O operador lógico `or` retorna o primeiro valor verdadeiro encontrado ou o
+último valor falso, caso todos sejam falsos.
+
+export const example2 = `
+local x = true and false
+local y = true and true
+local z = false and true
+local t = true and true and "" and 0 -- todos so valores são verdadeiros.
+
+print(x)
+print(y)
+print(z)
+print(t)
+`
+
+<Tabs>
+ <TabItem label="editor">
+    <CodeLua code={example2} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`true\ntrue\nfalse\nnil`} />
+  </TabItem>
+</Tabs>
+
+## Operador lógico "not"
+
+O operador lógico `not` inverte o valor de um operando. Se o operando for
+verdadeiro, retorna `false`; se o operando for falso, retorna `true`.
+
+export const example3 = `
+local x = not true
+local y = not false
+
+print(x)
+print(y)
+`
+
+<Tabs>
+ <TabItem label="editor">
+    <CodeLua code={example3} />
+  </TabItem>
+  <TabItem label="terminal">
+    <CodeBash code={`false\ntrue`} />
+  </TabItem>
+</Tabs>

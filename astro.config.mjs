@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-
 import markdoc from '@astrojs/markdoc';
 
 export default defineConfig({
@@ -47,14 +46,14 @@ export default defineConfig({
               translations: {
                 'pt-BR': 'Primeiros Passos',
               },
-              autogenerate: { directory: 'lua/preparando-ambiente' },
+              autogenerate: { directory: 'lua/primeiros-passos' },
             },
             {
               label: 'Basics',
               translations: {
-                'pt-BR': 'Conceitos Básicos'
+                'pt-BR': 'Conceitos Básicos',
               },
-              autogenerate: { directory: 'lua/conceitos-basicos' }
+              autogenerate: { directory: 'lua/conceitos-basicos' },
             },
           ],
         },
